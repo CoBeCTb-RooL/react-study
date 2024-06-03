@@ -7,9 +7,9 @@ const PostForm = ({posts, creationCallback})=>{
 
   const [postFormInputs, setPostFormInputs] = useState({title: '', body: ''})
 
-  function addNewPost(e){
-    // let posts = props.posts
+  function createPost(e){
     e.preventDefault()
+
     let errors = []
     if(!postFormInputs.title){
       errors.push('no title! ')
@@ -40,14 +40,11 @@ const PostForm = ({posts, creationCallback})=>{
   return (
     <>
     <form>
-        {/* управляемый компонент */}
-        <MyInput type="text" placeholder='Название поста' value={postFormInputs.title} onChange={e=>{setPostFormInputs({...postFormInputs, title: e.target.value});}}/> 
+        <MyInput type="text" placeholder='Название поста'  value={postFormInputs.title} onChange={e=>{setPostFormInputs({...postFormInputs, title: e.target.value});}} /> 
 
-        {/* неуправляемый компонент */}
         <MyInput type="text" placeholder='Текст' value={postFormInputs.body} onChange={e=>{setPostFormInputs({...postFormInputs, body: e.target.value});}} />
 
-        {/* <input type="text" placeholder='Текст' ref={bodyInputRef}/> */}
-        <MyButton onClick={addNewPost} type="submit">Создать пост</MyButton>
+        <MyButton onClick={createPost} type="submit">Создать пост</MyButton>
       </form>
     </>
     )

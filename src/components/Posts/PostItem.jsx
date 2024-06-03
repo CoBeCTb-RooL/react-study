@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import MyButton from "../UI/buttons/MyButton";
 
 const PostItem = (props)=>{
 
-  // const deletePost = (id) =>{
-  //   // alert(id)
-  // }
-function deletePost(id){
-  alert(id)
-}
+  function deletePost(post){
+    if(window.confirm('Удалить пост? ')){
+      alert(post.id+': 0000000000')
+      props.removingCallback(props.post)
+    }
+  }
 
   return (
         <div className="component-wrapper111">
@@ -19,7 +20,7 @@ function deletePost(id){
                 </div>
               </div>
               <div className="post__btns">
-                <button onClick={deletePost}>Удалить</button>
+                <MyButton onClick={()=>deletePost(props.post)}>Удалить</MyButton>
               </div>
             </div>
         </div>
