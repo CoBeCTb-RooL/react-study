@@ -20,8 +20,6 @@ function App() {
   ])
 
 
-  // const [selectedSort, setSelectedSort] = useState('title')
-  // const [searchQuery, setSearchQuery] = useState('')
   const [filter, setFilter] = useState({sort: '', query: ''})
 
   
@@ -35,7 +33,6 @@ function App() {
 
 
   const sortedAndSearchedPosts = useMemo(()=>{
-    // console.log(searchQuery)
     return sortedPosts.filter(post=>post.title.toLowerCase().includes(filter.query.toLowerCase()) || post.content.toLowerCase().includes(filter.query.toLowerCase()) )
   }, [filter, sortedPosts])
 
@@ -48,32 +45,20 @@ function App() {
     setPosts(posts.filter(p => p.id != post.id))
   }
 
-  // function sortPosts(sort){
-  //   console.log('fired::: sortPosts')
-  //   setFilter({...filter, sort: sort})
-  // }
-
   
   return (
     <div className="App">
-
       <PostForm 
         posts={posts} 
         creationCallback={addCreatedPost} 
       />
 
-      <div>
-        <hr style={{margin: '15px 0'}}/>
-        
-        <PostFilter
-          filter={filter}
-          setFilter={setFilter}
-          // sortPosts={sortPosts}
-         />
-        
-      </div>
-
-
+      <hr style={{margin: '15px 0'}}/>
+      <PostFilter
+        filter={filter}
+        setFilter={setFilter}
+      />
+      
       <PostsList 
         title="Посты:" 
         posts={sortedAndSearchedPosts} 
