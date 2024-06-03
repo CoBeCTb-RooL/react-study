@@ -8,12 +8,10 @@ import PostsList from './components/Posts/PostsList';
 import PostForm from './components/Posts/PostForm';
 import MySelect from './components/UI/selects/MySelect';
 import MyInput from './components/UI/inputs/MyInput';
+import PostFilter from './components/Posts/PostFilter';
 
 
 function App() {
-
-  const [selectedSort, setSelectedSort] = useState('title')
-  const [searchQuery, setSearchQuery] = useState('')
 
   const [posts, setPosts] = useState([
     {id: 1, title: 'Javascript', content: 'Javascript and stuff!'},
@@ -21,13 +19,26 @@ function App() {
     {id: 3, title: 'Delphi', content: 'Delphi is another language'},
   ])
 
+
+  // const [selectedSort, setSelectedSort] = useState('title')
+  // const [searchQuery, setSearchQuery] = useState('')
+  const [filter, setFilter] = useState({sort: '', query: ''})
+
+  
   const sortedPosts = useMemo(()=>{
-    console.log('отработала ф-ция getSortedPosts :: "'+selectedSort+'"')
-    if(selectedSort){
-      return [...posts].sort((a, b)=> a[selectedSort].localeCompare(b[selectedSort]))
+    console.log('отработала ф-ция getSortedPosts :: "'+filter.sort+'"')
+    if(filter.sort){
+      return [...posts].sort((a, b)=> a[filter.sort].localeCompare(b[filter.sort]))
     }
     return posts
-  }, [selectedSort, posts])
+  }, [filter, posts])
+
+
+  const sortedAndSearchedPosts = useMemo(()=>{
+    // console.log(searchQuery)
+    return sortedPosts.filter(post=>post.title.toLowerCase().includes(filter.query.toLowerCase()) || post.content.toLowerCase().includes(filter.query.toLowerCase()) )
+  }, [filter, sortedPosts])
+
   
   function addCreatedPost(newPost){
     setPosts([...posts, newPost])
@@ -37,11 +48,10 @@ function App() {
     setPosts(posts.filter(p => p.id != post.id))
   }
 
-  function sortPosts(sort){
-    setSelectedSort(sort)
-  }
-
-
+  // function sortPosts(sort){
+  //   console.log('fired::: sortPosts')
+  //   setFilter({...filter, sort: sort})
+  // }
 
   
   return (
@@ -55,27 +65,18 @@ function App() {
       <div>
         <hr style={{margin: '15px 0'}}/>
         
-        <MyInput placeholder="Поиск..." 
-          value={searchQuery} 
-          onChange={(e)=>setSearchQuery(e.target.value)} 
-        />
-        
-        <MySelect 
-          defaultValue='-сортировка по-'
-          value={selectedSort}
-          onChange={sortPosts}
-          options={[
-            {value: 'title', name: 'по названию'},
-            {value: 'content', name: 'по тексту'},
-          ]}
-        />
+        <PostFilter
+          filter={filter}
+          setFilter={setFilter}
+          // sortPosts={sortPosts}
+         />
         
       </div>
 
 
       <PostsList 
         title="Посты:" 
-        posts={sortedPosts} 
+        posts={sortedAndSearchedPosts} 
         removingCallback={removePost} 
       />
 
