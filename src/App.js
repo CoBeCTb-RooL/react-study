@@ -18,9 +18,9 @@ import axios from 'axios';
 function App() {
 
   const [posts, setPosts] = useState([
-    {id: 1, title: 'Javascript', content: 'Javascript and stuff!'},
-    {id: 2, title: 'it\'s Python', content: 'Python is language!'},
-    {id: 3, title: 'Delphi', content: 'Delphi is another language'},
+    {id: 1, title: 'Javascript', body: 'Javascript and stuff!'},
+    {id: 2, title: 'it\'s Python', body: 'Python is language!'},
+    {id: 3, title: 'Delphi', body: 'Delphi is another language'},
   ])
 
 
@@ -49,17 +49,15 @@ function App() {
   }
 
 
-  async function fetchPosts(){
-    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    console.log(response.data)
-  }
-
-  fetchPosts()
-
   function removePost(post){
     setPosts(posts.filter(p => p.id != post.id))
   }
 
+  
+  async function fetchPosts(){
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    console.log(response.data)
+  }
 
   const [isModalVisible, setIsModalVisible] = useState(false)
   

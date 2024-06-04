@@ -20,7 +20,7 @@ const PostFilter = ({filter, setFilter})=>{
         onChange={(selectedSort)=>setFilter({...filter, sort: selectedSort})}
         options={[
           {value: 'title', name: 'по названию'},
-          {value: 'content', name: 'по тексту'},
+          {value: 'body', name: 'по тексту'},
         ]}
       />
     </>

@@ -23,7 +23,7 @@ const PostForm = ({posts, creationCallback})=>{
       const newPost = {
         id: Math.max(...posts.map(i => i.id)) + 1,
         title: postFormInputs.title,
-        content: postFormInputs.body
+        body: postFormInputs.body
       }
       creationCallback(newPost)
       setPostFormInputs({title: '', body: ''})
