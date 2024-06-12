@@ -29,3 +29,19 @@ hr{margin: 15px 0; }
     justify-content: space-between;
     align-items: center; 
 }
+
+
+
+.pages__wrapper{
+    margin-top: 30px; 
+    display: flex;
+}
+.pages__page{
+    padding: 10px; 
+    border: 1px solid teal; 
+    cursor: pointer; 
+}
+.pages__page_current{
+    border: 2px solid orange;
+    font-weight: bold;
+}

@@ -3,6 +3,11 @@ import MyButton from "../UI/buttons/MyButton";
 
 const PostItem = (props)=>{
 
+  // function updatePost(post){
+  //   alert(post.title)
+    
+  // }
+
   function deletePost(post){
     if(window.confirm('Удалить пост? ')){
       alert(post.id+': 0000000000')
@@ -20,6 +25,7 @@ const PostItem = (props)=>{
                 </div>
               </div>
               <div className="post__btns">
+                {/* <MyButton onClick={()=>updatePost(props.post)}>редактировать</MyButton> */}
                 <MyButton onClick={()=>deletePost(props.post)}>Удалить</MyButton>
               </div>
             </div>
